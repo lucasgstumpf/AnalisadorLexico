@@ -1,1 +1,6 @@
-abriu arquivo com certeza
+| Token   | Valor   | Linha   |
+| NUMERO  | 1       | 1       |
+| MULTIPLICACAO | *       | 1       |
+| NUMERO  | 5       | 1       |
+| DIVISAO | /       | 1       |
+| NUMERO  | 2       | 1       |

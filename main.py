@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from UiMain import Ui_MainWindow
+from analisadorLexico import processaALexico
 
 
 
@@ -16,6 +17,9 @@ class Main:
         self.ui.buttonSalvar.clicked.connect(self.salvar_arquivo)
         self.ui.buttonProcessar.clicked.connect(self.processar)
 
+        self.textoEntrada = ""
+
+
     def run(self):
         self.MainWindow.show()  # Mostrar a janela principal
         self.app.exec_()  # Executar o loop de eventos do aplicativo
@@ -27,7 +31,8 @@ class Main:
         
         if file_name:
             with open(file_name, "r") as file:
-                self.ui.textEntrada.setPlainText(file.read())
+                self.textoEntrada = file.read()
+                self.ui.textEntrada.setPlainText(self.textoEntrada)
                 print(f"Arquivo aberto: {file_name}")
 
     def salvar_arquivo(self):
@@ -37,15 +42,13 @@ class Main:
         
         if file_name:
             with open(file_name, "w") as file:
-                file.write(self.ui.textEntrada.toPlainText())
+                file.write(self.ui.textSaida.toPlainText())
                 print(f"Arquivo salvo: {file_name}")
+    
     def processar(self):
-        print("Processando")
-        text = "Este deve aparecer"
+        print( self.ui.textEntrada.toPlainText() )
+        text = processaALexico( self.ui.textEntrada.toPlainText() )
         self.ui.textSaida.setPlainText(text)
-
-
-
 
 if __name__ == "__main__":
     secondary_app = Main()
